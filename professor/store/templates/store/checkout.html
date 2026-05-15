@@ -1,0 +1,29 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<section class="page-head">
+  <p class="eyebrow">Paiement</p>
+  <h1>Finaliser la commande</h1>
+</section>
+<section class="checkout">
+  <form class="card form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn wide" type="submit">Payer et valider</button>
+  </form>
+  <aside class="card">
+    <h3>Résumé</h3>
+    {% for it in items %}
+    <div class="mini">
+      <span>{{ it.book.title }}</span>
+      <strong>{{ it.subtotal }} FCFA</strong>
+    </div>
+    {% endfor %}
+    <hr>
+    <div class="mini total">
+      <span>Total</span>
+      <strong>{{ total }} FCFA</strong>
+    </div>
+    <small>Mobile Money → vous serez redirigé vers la page de paiement sécurisée FedaPay.</small>
+  </aside>
+</section>
+{% endblock %}
