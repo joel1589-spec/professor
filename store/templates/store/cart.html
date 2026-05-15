@@ -1,0 +1,5 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<section class="page-head"><p class="eyebrow">Panier</p><h1>Votre commande</h1></section>
+<section class="table">{% if items %}{% for it in items %}<div class="line"><div><strong>{{ it.book.title }}</strong><p>{{ it.qty }} × {{ it.book.price }} FCFA</p></div><div><strong>{{ it.subtotal }} FCFA</strong><br><a href="{% url 'remove_from_cart' it.book.id %}">Retirer</a></div></div>{% endfor %}<div class="line total"><strong>Total</strong><strong>{{ total }} FCFA</strong></div><a class="btn" href="{% url 'checkout' %}">Passer au paiement</a>{% else %}<div class="card"><p>Votre panier est vide.</p><a class="btn" href="{% url 'books' %}">Voir les documents</a></div>{% endif %}</section>
+{% endblock %}
