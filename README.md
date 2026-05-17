@@ -1,33 +1,27 @@
-# Professor Market - Django Render Ready
+# Site Professeur / Chercheur / Écrivain
 
-Site vitrine + boutique digitale pour un professeur/écrivain.
-
-## Déploiement Render
-
-Build Command:
+## Installation locale
 ```bash
-pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed_demo
-```
-
-Start Command:
-```bash
-gunicorn professor_market.wsgi:application
-```
-
-Variables Render:
-```env
-SECRET_KEY=auto-generated
-DEBUG=False
-ALLOWED_HOSTS=.onrender.com,localhost,127.0.0.1
-CSRF_TRUSTED_ORIGINS=https://*.onrender.com
-FEDAPAY_SECRET_KEY=...
-FEDAPAY_PUBLIC_KEY=...
-FEDAPAY_ENVIRONMENT=sandbox
-```
-
-Admin: `/admin-pro/`
-
-Créer un superuser localement:
-```bash
+pip install -r requirements.txt
+python manage.py migrate
 python manage.py createsuperuser
+python manage.py seed_demo
+python manage.py runserver
+```
+
+Admin : `/admin-pro/`
+
+## Important
+- Le public n’a pas besoin de créer un compte.
+- Les livres/documents se gèrent dans l’administration : titre, prix, couverture, fichier PDF/Word.
+- La photo du professeur se met dans `Site setting > profile_photo`.
+- Le paiement est en mode démo pour déploiement rapide. Remplacer les clés dans `professor_market/settings.py`.
+
+## Si tu avais déjà lancé une ancienne version
+Supprime `db.sqlite3`, puis relance :
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py seed_demo
+python manage.py runserver
 ```

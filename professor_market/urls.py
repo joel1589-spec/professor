@@ -3,13 +3,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-admin.site.site_header = 'Administration Professor Market'
-admin.site.site_title = 'Professor Market'
-admin.site.index_title = 'Gestion du contenu et des commandes'
+admin.site.site_header = "Administration du site"
+admin.site.site_title = "Admin"
+admin.site.index_title = "Gestion du contenu et des ventes"
 
 urlpatterns = [
-    path('admin-pro/', admin.site.urls),
-    path('', include('store.urls')),
+    path("admin-pro/", admin.site.urls),
+    path("", include("store.urls")),
 ]
 
 if settings.DEBUG:

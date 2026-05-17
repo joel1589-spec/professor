@@ -1,1 +1,1 @@
-function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
+function toggleMenu(){document.getElementById('nav').classList.toggle('show')}

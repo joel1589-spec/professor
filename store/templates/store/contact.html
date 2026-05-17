@@ -1,2 +1,65 @@
 {% extends 'store/base.html' %}
-{% block content %}<section class="page-head"><p class="eyebrow">Contact</p><h1>Demander une information</h1></section><section class="checkout"><form class="card form" method="post">{% csrf_token %}{{ form.as_p }}<button class="btn wide" type="submit">Envoyer</button></form><aside class="card"><h3>Coordonnées</h3><p>{{ site.email }}</p><p>{{ site.phone }}</p><p>{{ site.address }}</p></aside></section>{% endblock %}
+{% block content %}
+
+<section class="page-head">
+  <p class="eyebrow">Contact</p>
+  <h1>Demander une information</h1>
+</section>
+
+<section class="checkout">
+
+  <form class="card form" method="post" novalidate>
+    {% csrf_token %}
+
+    {% if messages %}
+      <div class="messages" style="margin:0 0 18px;border-radius:14px;">
+        {% for msg in messages %}
+          <p>{{ msg }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div>
+      <label for="{{ form.name.id_for_label }}">Nom :</label>
+      {{ form.name }}
+      {% if form.name.errors %}
+        <p style="color:#c0392b;font-size:13px;margin:4px 0 0;">{{ form.name.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <div style="margin-top:16px;">
+      <label for="{{ form.email.id_for_label }}">Email :</label>
+      {{ form.email }}
+      {% if form.email.errors %}
+        <p style="color:#c0392b;font-size:13px;margin:4px 0 0;">{{ form.email.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <div style="margin-top:16px;">
+      <label for="{{ form.subject.id_for_label }}">Sujet :</label>
+      {{ form.subject }}
+      {% if form.subject.errors %}
+        <p style="color:#c0392b;font-size:13px;margin:4px 0 0;">{{ form.subject.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <div style="margin-top:16px;">
+      <label for="{{ form.message.id_for_label }}">Message :</label>
+      {{ form.message }}
+      {% if form.message.errors %}
+        <p style="color:#c0392b;font-size:13px;margin:4px 0 0;">{{ form.message.errors.0 }}</p>
+      {% endif %}
+    </div>
+
+    <button class="btn wide" type="submit">Envoyer</button>
+  </form>
+
+  <aside class="card">
+    <h3>Coordonnées</h3>
+    <p>{{ site.email }}</p>
+    <p>{{ site.phone }}</p>
+    <p>{{ site.address }}</p>
+  </aside>
+
+</section>
+{% endblock %}
