@@ -217,7 +217,6 @@ def checkout(request):
 
     return render(request, 'store/checkout.html', {
         'form': form, 'items': items, 'total': total,
-        'demo_keys': settings.PAYMENT_DEMO_KEYS,
     })
 
 
