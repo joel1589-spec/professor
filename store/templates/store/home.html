@@ -13,7 +13,7 @@
     </div>
     <div class="portrait-card">
         {% if site.profile_photo %}
-            <img src="{{ site.profile_photo.url }}?w=800&h=600&crop=fill&gravity=face&quality=auto" alt="Photo du professeur">
+            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur">
         {% else %}
             <div class="portrait-fallback">EP</div>
         {% endif %}
