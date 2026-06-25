@@ -191,7 +191,7 @@ nav a:not(.cart) {
     margin: 0 0 14px;
 }
 
-.portrait-card,
+/*.portrait-card,
 .card {
     background: rgba(255, 255, 255, .86);
     border: 1px solid var(--line);
@@ -215,6 +215,51 @@ nav a:not(.cart) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}*/
+
+.portrait-card {
+    min-height: 430px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    overflow: hidden;
+    position: relative;
+    border-radius: 30px;
+}
+
+.portrait-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;  /* Centre l'image en haut */
+}
+
+/* Pour les très grands écrans */
+@media (min-width: 1200px) {
+    .portrait-card {
+        min-height: 500px;
+        max-height: 600px;
+    }
+}
+
+/* Pour les écrans moyens (tablette) */
+@media (max-width: 991px) {
+    .portrait-card {
+        min-height: 350px;
+        max-height: 400px;
+    }
+}
+
+/* Pour les mobiles */
+@media (max-width: 576px) {
+    .portrait-card {
+        min-height: 280px;
+        max-height: 350px;
+        border-radius: 20px;
+    }
 }
 
 .portrait-card:after {
