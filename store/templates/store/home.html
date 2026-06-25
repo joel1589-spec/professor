@@ -12,16 +12,16 @@
         </div>
     </div>
     <div class="portrait-card">
-        {% if site.profile_photo %}
-            {# 🆕 Utilisation des paramètres Cloudinary pour redimensionner et centrer la photo #}
-            <img src="{{ site.profile_photo.url }}?w=600&h=700&crop=fill&gravity=face&quality=auto" 
-                 alt="Photo du professeur">
-        {% else %}
-            <div class="portrait-fallback">EP</div>
-        {% endif %}
-        <h3>{{ site.site_name }}</h3>
-        <p>{{ site.tagline }}</p>
-    </div>
+    {% if site.profile_photo %}
+        <div class="portrait-image-wrapper">
+            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur" class="portrait-image">
+        </div>
+    {% else %}
+        <div class="portrait-fallback">EP</div>
+    {% endif %}
+    <h3>{{ site.site_name }}</h3>
+    <p>{{ site.tagline }}</p>
+</div>
 </section>
 
 <section class="section">
