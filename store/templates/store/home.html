@@ -12,16 +12,14 @@
         </div>
     </div>
     <div class="portrait-card">
-    {% if site.profile_photo %}
-        <div class="portrait-image-wrapper">
-            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur" class="portrait-image">
-        </div>
-    {% else %}
-        <div class="portrait-fallback">EP</div>
-    {% endif %}
-    <h3>{{ site.site_name }}</h3>
-    <p>{{ site.tagline }}</p>
-</div>
+        {% if site.profile_photo %}
+            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur">
+        {% else %}
+            <div class="portrait-fallback">EP</div>
+        {% endif %}
+        <h3>{{ site.site_name }}</h3>
+        <p>{{ site.tagline }}</p>
+    </div>
 </section>
 
 <section class="section">
@@ -51,7 +49,6 @@
     <div class="grid services">
         {% for s in services %}
             <article class="card service-card">
-                <!-- AFFICHE DU SERVICE -->
                 {% if s.poster %}
                     <div class="service-poster-wrapper">
                         <img src="{{ s.poster.url }}" 
@@ -64,7 +61,6 @@
                         <span>📘</span>
                     </div>
                 {% endif %}
-                
                 <h3>{{ s.title }}</h3>
                 <p>{{ s.description|truncatewords:28 }}</p>
                 <strong>{{ s.price_note }}</strong>
