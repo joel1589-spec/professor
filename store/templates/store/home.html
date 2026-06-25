@@ -13,7 +13,9 @@
     </div>
     <div class="portrait-card">
         {% if site.profile_photo %}
-            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur">
+            {# 🆕 Utilisation des paramètres Cloudinary pour redimensionner et centrer la photo #}
+            <img src="{{ site.profile_photo.url }}?w=600&h=700&crop=fill&gravity=face&quality=auto" 
+                 alt="Photo du professeur">
         {% else %}
             <div class="portrait-fallback">EP</div>
         {% endif %}
@@ -49,7 +51,7 @@
     <div class="grid services">
         {% for s in services %}
             <article class="card service-card">
-                <!-- 🆕 AFFICHE DU SERVICE -->
+                <!-- AFFICHE DU SERVICE -->
                 {% if s.poster %}
                     <div class="service-poster-wrapper">
                         <img src="{{ s.poster.url }}" 
