@@ -1,15 +1,32 @@
 {% extends 'store/base.html' %}
+
 {% block content %}
 <section class="page-head">
   <p class="eyebrow">Paiement</p>
   <h1>Finaliser la commande</h1>
 </section>
+
 <section class="checkout">
   <form class="card form" method="post">
     {% csrf_token %}
+    
+    <!-- Champs du formulaire (nom, email, téléphone, ville) -->
     {{ form.as_p }}
+    
+    <!-- ✅ CHAMP CACHÉ : On force Mobile Money -->
+    <input type="hidden" name="payment_method" value="MOBILE_MONEY">
+    
+    <!-- Message informatif (optionnel) -->
+    <div class="payment-info" style="background: #f8f9fa; padding: 12px 16px; border-radius: 8px; margin: 12px 0;">
+      <p style="margin: 0; font-size: 14px; color: #6c757d;">
+        <span style="font-size: 18px;">📱</span> 
+        Paiement sécurisé par <strong>Mobile Money</strong> (TMoney, Moov)
+      </p>
+    </div>
+    
     <button class="btn wide" type="submit">Payer et valider</button>
   </form>
+  
   <aside class="card">
     <h3>Résumé</h3>
     {% for it in items %}
@@ -23,7 +40,9 @@
       <span>Total</span>
       <strong>{{ total }} FCFA</strong>
     </div>
-    <small>Mobile Money → vous serez redirigé vers la page de paiement sécurisée FedaPay.</small>
+    <small style="display: block; margin-top: 12px; color: #6c757d;">
+      📱 Mobile Money → vous serez redirigé vers la page de paiement sécurisée FedaPay.
+    </small>
   </aside>
 </section>
 {% endblock %}
