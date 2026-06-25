@@ -10,13 +10,32 @@
   <form class="card form" method="post">
     {% csrf_token %}
     
-    <!-- Champs du formulaire (nom, email, téléphone, ville) -->
-    {{ form.as_p }}
+    <!-- ✅ CHAMPS MANUELS : on affiche uniquement ce qu'on veut -->
+    <div class="form-group">
+      <label for="id_full_name">Nom complet</label>
+      {{ form.full_name }}
+    </div>
     
-    <!-- ✅ CHAMP CACHÉ : On force Mobile Money -->
+    <div class="form-group">
+      <label for="id_email">Email</label>
+      {{ form.email }}
+    </div>
+    
+    <div class="form-group">
+      <label for="id_phone">Téléphone</label>
+      {{ form.phone }}
+    </div>
+    
+    <div class="form-group">
+      <label for="id_city">Ville</label>
+      {{ form.city }}
+    </div>
+    
+    <!-- ⛔ LE CHAMP payment_method EST TOTALEMENT SUPPRIMÉ -->
+    <!-- On force la valeur via un champ caché -->
     <input type="hidden" name="payment_method" value="MOBILE_MONEY">
     
-    <!-- Message informatif (optionnel) -->
+    <!-- Message informatif -->
     <div class="payment-info" style="background: #f8f9fa; padding: 12px 16px; border-radius: 8px; margin: 12px 0;">
       <p style="margin: 0; font-size: 14px; color: #6c757d;">
         <span style="font-size: 18px;">📱</span> 
