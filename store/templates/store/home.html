@@ -12,13 +12,11 @@
         </div>
     </div>
     <div class="portrait-card">
-        {% if site.profile_photo %}
-            <img src="{{ site.profile_photo.url }}" alt="Photo du professeur">
-        {% else %}
-            <div class="portrait-fallback">EP</div>
-        {% endif %}
-        <h3>{{ site.site_name }}</h3>
-        <p>{{ site.tagline }}</p>
+    <img src="https://res.cloudinary.com/dcyhiigki/image/upload/v174XXXXXXXX/profile/WhatsApp_Image_2026-06-18_at_08.55.14.jpeg" 
+         alt="Photo du professeur"
+         class="portrait-image">
+    <h3>{{ site.site_name }}</h3>
+    <p>{{ site.tagline }}</p>
     </div>
 </section>
 
