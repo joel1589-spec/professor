@@ -93,7 +93,11 @@ USE_TZ = True
 # -------------- Fichiers statiques et médias --------------
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# MEDIA_URL doit toujours être défini, même en production (utile pour le fallback
+# et pour éviter que Django retombe sur une URL relative vide)
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # 🆕 Configuration de Cloudinary
 import cloudinary
@@ -115,16 +119,28 @@ cloudinary.config(
     secure=True
 )
 
-# En production (DEBUG=False), on utilise Cloudinary pour stocker les médias
-# En développement (DEBUG=True), on utilise le stockage local
+# Django 4.2+/5.x utilise STORAGES (DEFAULT_FILE_STORAGE et STATICFILES_STORAGE
+# sont obsolètes et ne sont plus fiables). On définit donc explicitement STORAGES.
+# En production (DEBUG=False) : Cloudinary pour les médias, Whitenoise pour le static.
+# En développement (DEBUG=True) : stockage local classique pour tout.
 if not DEBUG:
-    # Production : Cloudinary
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 else:
-    # Développement : stockage local
-    MEDIA_URL = "/media/"
-    MEDIA_ROOT = BASE_DIR / "media"
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
